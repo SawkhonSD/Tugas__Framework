@@ -7,90 +7,8 @@ Fitur: CRUD lengkap, validasi, pesan sukses, konfirmasi hapus, pencarian, pagina
 
 - **NIM:** 240631100010
 - **Nama:** Moh Habib Azka Alawi Saekhon D
-
-> **Penting:** paket ini berisi kode aplikasi (folder `app/`), file database, dan konfigurasi.
-> Framework CodeIgniter 4 **tidak ikut dibundel** dan diunduh lewat Composer pada langkah 2 (resmi, ±1 menit).
-> Bootstrap 5 dimuat lewat CDN (jsDelivr), jadi perlu koneksi internet saat membuka aplikasi.
-
-## 1. Kebutuhan Sistem
-
-- **[Laragon](https://laragon.org/download/)** (disarankan versi *Full*). Sudah termasuk PHP 8.1+ (ekstensi `intl`, `mbstring`, `mysqlnd`, `curl`, `json` aktif), Apache/Nginx, MySQL/MariaDB, Composer, Git, dan HeidiSQL.
-- Pastikan Laragon sudah dijalankan (**Start All**) sebelum mengikuti langkah di bawah.
-
-> Jika `intl` belum aktif: klik kanan ikon Laragon → **PHP → Extensions → intl**, lalu Laragon akan me-restart Apache.
-
-## 2. Instalasi (Laragon)
-
-**a. Buat proyek CodeIgniter 4 di folder `www` Laragon dan salin kode aplikasi**
-
-Klik kanan ikon Laragon → **Terminal**, lalu:
-
-```bash
-cd C:\laragon\www
-composer create-project codeigniter4/appstarter inventaris-buku
-```
-
-Ekstrak zip ini, lalu **salin isinya ke dalam `C:\laragon\www\inventaris-buku`** dan pilih *Replace/Timpa*
-jika ditanya (folder `app/` akan ditimpa file `Routes.php`, controller, model, dan view milik aplikasi ini).
-
-Hasil akhirnya:
-
-```
-C:\laragon\www\inventaris-buku\
-├── app/
-│   ├── Config/Routes.php            <- routing aplikasi
-│   ├── Controllers/Home.php, Buku.php
-│   ├── Models/BukuModel.php
-│   └── Views/ (layout/main.php, home.php, buku/*.php)
-├── database/inventaris_buku.sql     <- ekspor database
-├── .env.example
-├── README.md
-└── (vendor/, public/, system, dll. dari CodeIgniter)
-```
-
-**b. Impor database**
-
-Cara HeidiSQL (bawaan Laragon): klik **Database** di jendela Laragon → login (user `root`, password kosong) →
-menu **File → Run SQL file...** → pilih `database/inventaris_buku.sql` → **Open**.
-(File ini sudah membuat database `inventaris_buku`, tabel `buku`, dan 12 data contoh.)
-
-Cara Terminal Laragon:
-
-```bash
-cd C:\laragon\www\inventaris-buku
-mysql -u root < database/inventaris_buku.sql
-```
-
-**c. Konfigurasi `.env`**
-
-Salin `.env.example` menjadi `.env` (ada titik di depan):
-
-```bash
-copy .env.example .env
-```
-
-Laragon memakai user `root` tanpa password, jadi isinya sudah sesuai dan tidak perlu diubah.
-Jika di folder sudah ada file bernama `env` bawaan CodeIgniter, abaikan saja; pakai `.env` dari paket ini.
-
-**d. Jalankan aplikasi**
-
-Cara 1 (disarankan, **Auto Virtual Host** Laragon): klik kanan ikon Laragon → **Apache → Reload** (atau **Stop All → Start All**).
-Laragon otomatis membuat alamat dari nama folder dan mengarahkannya ke folder `public/`. Buka:
-
-**http://inventaris-buku.test**
-
-Cara 2 (server bawaan CodeIgniter, tanpa virtual host):
-
-```bash
-php spark serve
-```
-
-lalu buka **http://localhost:8080** dan ubah `app.baseURL` di `.env` menjadi `'http://localhost:8080/'`.
-
-> Jika `.test` tidak terbuka: pastikan **Menu → Preferences → General → Auto virtual hosts** dicentang,
-> lalu Reload Apache. Jika memakai Nginx, pastikan `Document Root` mengarah ke `public/`.
-
-## 3. Daftar Halaman
+ 
+## Daftar Halaman
 
 | URL | Fungsi |
 |---|---|
@@ -120,7 +38,7 @@ Form ini digunakan untuk memasukkan judul, penulis, tahun terbit, dan kategori b
 
 ![Tampilan form tambah buku](docs/screenshots/tambah-buku.png)
 
-## 4. Alur MVC (untuk demonstrasi)
+## Alur MVC (untuk demonstrasi)
 
 - **Model** `app/Models/BukuModel.php`: terhubung ke tabel `buku`, berisi aturan validasi dan daftar kategori.
 - **View** `app/Views/`: tampilan HTML + Bootstrap. `layout/main.php` adalah kerangka bersama, `buku/_form.php` dipakai ulang oleh form tambah dan ubah.
@@ -129,7 +47,7 @@ Form ini digunakan untuk memasukkan judul, penulis, tahun terbit, dan kategori b
 
 Contoh alur tambah data: `/buku/tambah` (`create()` menampilkan form) → submit → `POST /buku/simpan` (`store()` memvalidasi lewat model) → jika gagal kembali ke form dengan pesan error; jika berhasil redirect ke `/buku` dengan pesan sukses.
 
-## 5. Struktur Tabel `buku`
+## Struktur Tabel `buku`
 
 | Kolom | Tipe | Keterangan |
 |---|---|---|
@@ -159,15 +77,6 @@ Contoh alur tambah data: `/buku/tambah` (`create()` menampilkan form) → submit
 | Link/menu mengarah ke alamat salah atau 404 | `app.baseURL` di `.env` harus sama dengan alamat yang dipakai di browser (`http://inventaris-buku.test/` atau `http://localhost:8080/`) |
 | Tampilan tanpa gaya | Perlu internet untuk memuat Bootstrap dari CDN |
 | Perubahan `.env` tidak terbaca | Pastikan namanya `.env`, bukan `env` atau `.env.txt`, lalu Reload Apache |
-
-## 8. Pengumpulan (GitHub)
-
-Nama folder/repo: `NIM_Nama_InventarisBuku`. Jangan commit folder `vendor/` dan file `.env`
-(sudah diabaikan oleh `.gitignore` bawaan CodeIgniter). Sertakan file `.sql`, README ini, dokumentasi
-berisi tangkapan layar, dan tautan video demonstrasi.
-
-## 9. Pernyataan Penggunaan Bantuan AI
-
 Kode dasar aplikasi ini disusun dengan bantuan AI (Claude, Anthropic). Tinjau dan sesuaikan pernyataan ini
 dengan proses pengerjaan yang sebenarnya sebelum dikumpulkan.
 
