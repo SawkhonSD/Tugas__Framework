@@ -58,7 +58,7 @@ Contoh alur tambah data: `/buku/tambah` (`create()` menampilkan form) → submit
 | kategori | VARCHAR(80) | Wajib |
 | created_at, updated_at | DATETIME | Diisi otomatis oleh CodeIgniter |
 
-## 6. Pengujian Manual (checklist)
+## Pengujian Manual (checklist)
 
 - [ ] Tambah buku dengan data valid → muncul pesan sukses
 - [ ] Kirim form kosong → muncul pesan validasi
@@ -67,7 +67,7 @@ Contoh alur tambah data: `/buku/tambah` (`create()` menampilkan form) → submit
 - [ ] Cari "novel" → hasil terfilter
 - [ ] Perkecil jendela browser → tampilan tetap rapi (responsif)
 
-## 7. Masalah Umum
+## Masalah Umum
 
 | Gejala | Solusi |
 |---|---|
