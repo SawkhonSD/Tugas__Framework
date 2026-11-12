@@ -77,8 +77,3 @@ Contoh alur tambah data: `/buku/tambah` (`create()` menampilkan form) → submit
 | Link/menu mengarah ke alamat salah atau 404 | `app.baseURL` di `.env` harus sama dengan alamat yang dipakai di browser (`http://inventaris-buku.test/` atau `http://localhost:8080/`) |
 | Tampilan tanpa gaya | Perlu internet untuk memuat Bootstrap dari CDN |
 | Perubahan `.env` tidak terbaca | Pastikan namanya `.env`, bukan `env` atau `.env.txt`, lalu Reload Apache |
-Kode dasar aplikasi ini disusun dengan bantuan AI (Claude, Anthropic). Tinjau dan sesuaikan pernyataan ini
-dengan proses pengerjaan yang sebenarnya sebelum dikumpulkan.
-
-- Nama: Moh Habib Azka Alawi Saekhon D
-- NIM: 240631100010
